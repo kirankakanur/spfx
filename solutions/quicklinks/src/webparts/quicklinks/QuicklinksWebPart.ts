@@ -49,37 +49,37 @@ export default class QuicklinksWebPart extends BaseClientSideWebPart <IQuicklink
           groups: [
             {
               groupName: strings.BasicGroupName,
-              groupFields: [
-                            PropertyFieldCollectionData('quickLinksCollection', {
-                            enableSorting:true,
-                                fields: [
-                                            {
-                                              id: 'name',
-                                              required: true,
-                                              title: 'Link Title',
-                                              type: CustomCollectionFieldType.string
-                                            },
-                                            {
-                                              id: 'link',
-                                              required: true,
-                                              title: 'Link URL',
-                                              type: CustomCollectionFieldType.url
-                                            },
-                                            {
-                                              id: 'linktype',
-                                              title: 'External Link?',
-                                              type: CustomCollectionFieldType.boolean
-                                            }
-                                ],
-                            key: 'quickLinksCollection',
-                            label: 'Quick Links',
-                            manageBtnLabel: 'Manage Quick Links',
-                            panelHeader: 'Manage Quick Links',
-                            panelDescription: 'Enter Link Title, Link URL, and check the box if it is an external link. \n\nClick + to add a new link. Click x to remove link. \n\nSort order can be changed by selecting the number from the dropdown list in the first column below.',
-                            value: this.properties.quickLinksCollection,
-                            })
-                            ]
-            }
+groupFields: [
+              PropertyFieldCollectionData('quickLinksCollection', {
+              enableSorting:true,
+                  fields: [
+                              {
+                                id: 'name',
+                                required: true,
+                                title: 'Link Title',
+                                type: CustomCollectionFieldType.string
+                              },
+                              {
+                                id: 'link',
+                                required: true,
+                                title: 'Link URL',
+                                type: CustomCollectionFieldType.url
+                              },
+                              {
+                                id: 'linktype',
+                                title: 'External Link?',
+                                type: CustomCollectionFieldType.boolean
+                              }
+                  ],
+              key: 'quickLinksCollection',
+              label: 'Quick Links',
+              manageBtnLabel: 'Manage Quick Links',
+              panelHeader: 'Manage Quick Links',
+              panelDescription: 'Enter Link Title, Link URL, and check the box if it is an external link. \n\nClick + to add a new link. Click x to remove link. \n\nSort order can be changed by selecting the number from the dropdown list in the first column below.',
+              value: this.properties.quickLinksCollection,
+              })
+              ]
+}
           ]
         }
       ]

@@ -4,33 +4,18 @@ import { IQuicklinksProps } from './IQuicklinksProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 
 export default class Quicklinks extends React.Component<IQuicklinksProps, {}> {
-  public render(): React.ReactElement<IQuicklinksProps> {
-    
-  //console.log("links" + this.props.quickLinksCollection);
+  public render(): React.ReactElement<IQuicklinksProps> {    
   let quickLinksMarkup = "";
-  let finalMarkup ="";
-  let linkType;
   let i;
 
   if(this.props.quickLinksCollection != null)
   {
   for (i=0; i < this.props.quickLinksCollection.length; i++)
   {
-    if(this.props.quickLinksCollection[i].linktype === null)
-    {
-      linkType = "internal";
-    }
-    else
-    {
-      linkType = "external";
-    }
     quickLinksMarkup += "<div>" +
                            "<a href='" + this.props.quickLinksCollection[i].link + "'>" + this.props.quickLinksCollection[i].name + "</a>" +
                            "</div>";
-  }
-
-
-  finalMarkup = quickLinksMarkup.replace("undefined", "");
+  } 
 }
 
   return(
@@ -40,7 +25,7 @@ export default class Quicklinks extends React.Component<IQuicklinksProps, {}> {
     <div className={styles.column}>
       <span className={styles.title}>Quick Links</span>
       <p className={styles.subTitle}>Here are the links from the web part's properties in the designated sort order.</p>
-      <div className={styles.subTitle} dangerouslySetInnerHTML={{ __html: finalMarkup }}></div>      
+      <div className={styles.subTitle} dangerouslySetInnerHTML={{ __html: quickLinksMarkup }}></div>      
     </div>
   </div>
 </div>
