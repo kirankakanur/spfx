@@ -1,11 +1,9 @@
 import * as React from 'react';
-import styles from './BingMap.module.scss';
 import { IBingMapProps } from './IBingMapProps';
-import { escape } from '@microsoft/sp-lodash-subset';
 import * as jquery from 'jquery';
 import { ReactBingmaps } from 'react-bingmaps-plus';
 
-export interface IReactGetItemsState{    
+export interface IGetItemsAndMapInfoBoxesState{    
   items:[    
         {    
           "Title": "",    
@@ -29,9 +27,9 @@ mapInfoBoxes:[
 
 export interface IBingMapInfoBoxProps{}
 
-export default class BingMap extends React.Component<IBingMapProps, IReactGetItemsState> {
+export default class BingMap extends React.Component<IBingMapProps, IGetItemsAndMapInfoBoxesState> {
   
-  public constructor(props: IBingMapProps, state: IReactGetItemsState){    
+  public constructor(props: IBingMapProps, state: IGetItemsAndMapInfoBoxesState){    
     super(props);    
     this.state = {    
       items: [    
@@ -64,11 +62,11 @@ export default class BingMap extends React.Component<IBingMapProps, IReactGetIte
         url: `${this.props.siteurl}/_api/web/lists/getbytitle('Locations')/items`,    
         type: "GET",    
         headers:{'Accept': 'application/json; odata=verbose;'},    
-        success: (resultData) => {
-          const mapInfoBoxArr: any = this.getMapInfoBoxes(resultData.d.results);
+        success: (listData) => {
+          const arrMapInfoBox: any = this.getMapInfoBoxes(listData.d.results);
           reactHandler.setState({    
-            items: resultData.d.results,
-            mapInfoBoxes: mapInfoBoxArr,
+            items: listData.d.results,
+            mapInfoBoxes: arrMapInfoBox,            
           });    
         },    
         error : (jqXHR, textStatus, errorThrown) => {    
@@ -77,24 +75,25 @@ export default class BingMap extends React.Component<IBingMapProps, IReactGetIte
   }
 
   private getMapInfoBoxes = (listItems) => {
-    let arr = [];
+    let arrInfoBox = [];
     for (var i = 0; i < listItems.length; i++) {    
       const latitude =   listItems[i].GeoLoc.Latitude;
       const longitude =  listItems[i].GeoLoc.Longitude;
-      arr.push({
+      arrInfoBox.push({
           location: [latitude,longitude],
           addHandler: "click",
-          infoboxOption: {title: listItems[i].Title, description: listItems[i].Hours},
+          infoboxOption: {title: listItems[i].Title, description: listItems[i].DispName + "<br/>" + listItems[i].Hours},
           pushPinOption: {color: "red" },
       });
   }
-  return arr;
-  }  
+  return arrInfoBox;
+  }
+  
   
   public render(): React.ReactElement<IBingMapProps> {    
-  const myArray = this.state.mapInfoBoxes;   
+  const arrInfoBoxesWithPushpins = this.state.mapInfoBoxes;   
  
-  if(myArray.length > 1)
+  if(arrInfoBoxesWithPushpins.length > 1)
   {
     return (    
             <div>
@@ -105,7 +104,7 @@ export default class BingMap extends React.Component<IBingMapProps, IReactGetIte
                   center={["41.878113","-87.629799"]}
                   mapTypeId={"road"}
                   zoom={13}                    
-                  infoboxesWithPushPins = {myArray}                        
+                  infoboxesWithPushPins = {arrInfoBoxesWithPushpins}                        
                   >
                   </ReactBingmaps> 
             </div>          
@@ -114,4 +113,5 @@ export default class BingMap extends React.Component<IBingMapProps, IReactGetIte
   else
       { return (<div>map is loading...</div>);}
   }
+
 }
