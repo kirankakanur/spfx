@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "bing-map-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/bingMap/BingMapWebPart.js",
+          "manifest": "./src/webparts/bingMap/BingMapWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "BingMapWebPartStrings": "lib/webparts/bingMap/loc/{locale}.js"
+  }
+}
