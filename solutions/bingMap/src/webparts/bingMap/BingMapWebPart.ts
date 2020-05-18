@@ -12,7 +12,6 @@ import BingMap from './components/BingMap';
 import { IBingMapProps } from './components/IBingMapProps';
 
 export interface IBingMapWebPartProps {
-  description: string;
   siteurl:string;
 }
 
@@ -22,7 +21,6 @@ export default class BingMapWebPart extends BaseClientSideWebPart <IBingMapWebPa
     const element: React.ReactElement<IBingMapProps> = React.createElement(
       BingMap,
       {
-        description: this.properties.description,
         siteurl:this.properties.siteurl,
       }
     );
@@ -49,9 +47,6 @@ export default class BingMapWebPart extends BaseClientSideWebPart <IBingMapWebPa
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                }),
                 PropertyPaneTextField('siteurl', {
                   label: "Enter Site URL:"
                 }),
