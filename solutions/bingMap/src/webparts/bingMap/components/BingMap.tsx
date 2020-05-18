@@ -100,7 +100,7 @@ export default class BingMap extends React.Component<IBingMapProps, IGetItemsAnd
                 <h2> CHICAGOLAND COVID-19 Testing Centers  </h2>  
                 <h3> Location Details</h3>
                 <ReactBingmaps
-                  bingmapKey="<Your Bing Map API Key here"
+                  bingmapKey="<Your Bing Map API Key here>"
                   center={["41.878113","-87.629799"]}
                   mapTypeId={"road"}
                   zoom={13}                    
